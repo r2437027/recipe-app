@@ -67,8 +67,8 @@ async function loadRecipes() {
     list.innerHTML += `
       <div class="recipe">
         <h3>${r.name}</h3>
-        <b>材料</b><br>${r.ingredients}<br>
-        <b>作り方</b><br>${r.steps}<br><br>
+        <b>材料🌼</b><br>${r.ingredients}<br>
+        <b>作り方🍳</b><br>${r.steps}<br><br>
         <button onclick="editRecipe('${docSnap.id}', \`${r.name}\`, \`${r.ingredients}\`, \`${r.steps}\`)">✏️整理</button>
         <button onclick="deleteRecipe('${docSnap.id}')">🗑 削除</button>
       </div>
@@ -119,8 +119,8 @@ async function searchRecipe() {
       list.innerHTML += `
         <div class="recipe">
           <h3>${highlightedName}</h3>
-          <b>材料</b><br>${r.ingredients}<br>
-          <b>作り方</b><br>${r.steps}<br><br>
+          <b>材料🌼</b><br>${r.ingredients}<br>
+          <b>作り方🍳</b><br>${r.steps}<br><br>
           <button onclick="editRecipe('${docSnap.id}', \`${r.name}\`, \`${r.ingredients}\`, \`${r.steps}\`)">✏️整理</button>
           <button onclick="deleteRecipe('${docSnap.id}')">🗑 削除</button>
         </div>
@@ -135,6 +135,7 @@ async function searchRecipe() {
 }
 
 window.searchRecipe = searchRecipe;
+
 
 
 
