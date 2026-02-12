@@ -29,7 +29,7 @@ async function addRecipe() {
   const steps = document.getElementById('steps').value;
 
   if (!name) {
-    alert("商品名の検索!");
+    alert("料理名の検索!");
     return;
   }
 
@@ -68,7 +68,7 @@ async function loadRecipes() {
       <div class="recipe">
         <h3>${r.name}</h3>
         <b>材料</b><br>${r.ingredients}<br>
-        <b>やり方</b><br>${r.steps}<br><br>
+        <b>作り方</b><br>${r.steps}<br><br>
         <button onclick="editRecipe('${docSnap.id}', \`${r.name}\`, \`${r.ingredients}\`, \`${r.steps}\`)">✏️整理</button>
         <button onclick="deleteRecipe('${docSnap.id}')">🗑 削除</button>
       </div>
@@ -120,7 +120,7 @@ async function searchRecipe() {
         <div class="recipe">
           <h3>${highlightedName}</h3>
           <b>材料</b><br>${r.ingredients}<br>
-          <b>やり方</b><br>${r.steps}<br><br>
+          <b>作り方</b><br>${r.steps}<br><br>
           <button onclick="editRecipe('${docSnap.id}', \`${r.name}\`, \`${r.ingredients}\`, \`${r.steps}\`)">✏️整理</button>
           <button onclick="deleteRecipe('${docSnap.id}')">🗑 削除</button>
         </div>
@@ -135,6 +135,7 @@ async function searchRecipe() {
 }
 
 window.searchRecipe = searchRecipe;
+
 
 
 
