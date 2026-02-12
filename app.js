@@ -93,4 +93,47 @@ window.deleteRecipe = deleteRecipe;
 window.editRecipe = editRecipe;
 
 loadRecipes();
+async function searchRecipe() {
+  const keyword = document.getElementById("search").value.toLowerCase();
+  const list = document.getElementById("recipeList");
+  list.innerHTML = '';
+
+  const querySnapshot = await getDocs(collection(db, "recipes"));
+
+  querySnapshot.forEach((docSnap) => {
+    const r = docSnap.data();
+    const nameLower = r.name.toLowerCase();
+
+    if (nameLower.includes(keyword)) {
+
+      // highlight chữ tìm thấy
+      let highlightedName = r.name;
+      if (keyword !== "") {
+        const regex = new RegExp(`(${keyword})`, "gi");
+        highlightedName = r.name.replace(
+          regex,
+          `<span style="background:yellow; font-weight:bold;">$1</span>`
+        );
+      }
+
+      list.innerHTML += `
+        <div class="recipe">
+          <h3>${highlightedName}</h3>
+          <b>Nguyên liệu</b><br>${r.ingredients}<br>
+          <b>Cách làm</b><br>${r.steps}<br><br>
+          <button onclick="editRecipe('${docSnap.id}', \`${r.name}\`, \`${r.ingredients}\`, \`${r.steps}\`)">✏️整理</button>
+          <button onclick="deleteRecipe('${docSnap.id}')">🗑 削除</button>
+        </div>
+      `;
+    }
+  });
+
+  // nếu ô trống thì load lại toàn bộ
+  if (keyword === "") {
+    loadRecipes();
+  }
+}
+
+window.searchRecipe = searchRecipe;
+
 
