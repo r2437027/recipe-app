@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recipe App</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ff8c42">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>🍳 調理方法</h2>
+
+<!-- tìm kiếm -->
+<input type="text" id="search" placeholder="🔍 商品名を入力してください！">
+
+<!-- form nhập -->
+<div class="form">
+  <input id="name" placeholder="商品名">
+  <textarea id="ingredients" placeholder="材料"></textarea>
+  <textarea id="steps" placeholder="やり方"></textarea>
+  <button onclick="addRecipe()">➕ 保存</button>
+</div>
+
+<hr>
+
+<!-- danh sách -->
+<div id="recipeList"></div>
+
+<script src="app.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
+</script>
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBpSQL--XWxdzhchXXyAoalHLBuEbQQWIY",
+  authDomain: "recipe-app-7f8d3.firebaseapp.com",
+  projectId: "recipe-app-7f8d3",
+  storageBucket: "recipe-app-7f8d3.firebasestorage.app",
+  messagingSenderId: "260784282896",
+  appId: "1:260784282896:web:1f6d19639a58d6585e9995",
+  measurementId: "G-1HJEK3RDEQ"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBpSQL--XWxdzhchXXyAoalHLBuEbQQWIY",
+  authDomain: "recipe-app-7f8d3.firebaseapp.com",
+  projectId: "recipe-app-7f8d3",
+  storageBucket: "recipe-app-7f8d3.firebasestorage.app",
+  messagingSenderId: "260784282896",
+  appId: "1:260784282896:web:1f6d19639a58d6585e9995",
+  measurementId: "G-1HJEK3RDEQ"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "DÁN CỦA BẠN",
+  authDomain: "DÁN",
+  projectId: "DÁN",
+  storageBucket: "DÁN",
+  messagingSenderId: "DÁN",
+  appId: "DÁN"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.db = db;
+</script>
+
+</body>
+</html>
+
