@@ -44,3 +44,39 @@ function render(keyword = '') {
     .forEach((r, index) => {
       list.innerHTML += `
         <div class="recipe">
+          <h3>${r.name}</h3>
+          <b>Nguyên liệu</b><br>${r.ingredients}<br>
+          <b>Cách làm</b><br>${r.steps}<br><br>
+          <button onclick="editRecipe(${index})">✏️ Sửa</button>
+          <button onclick="deleteRecipe(${index})" style="background:red;">🗑 Xoá</button>
+        </div>
+      `;
+    });
+}
+
+// Xoá món
+function deleteRecipe(index) {
+  if (confirm("Bạn chắc chắn muốn xoá món này?")) {
+    recipes.splice(index, 1);
+    localStorage.setItem('recipes', JSON.stringify(recipes));
+    render();
+  }
+}
+
+// Chỉnh sửa
+function editRecipe(index) {
+  const recipe = recipes[index];
+
+  document.getElementById('name').value = recipe.name;
+  document.getElementById('ingredients').value = recipe.ingredients;
+  document.getElementById('steps').value = recipe.steps;
+
+  editIndex = index;
+}
+
+// Tìm kiếm
+document.getElementById('search').addEventListener('input', e => {
+  render(e.target.value);
+});
+
+render();
