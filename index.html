@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recipe App</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ff8c42">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>🍳 App lưu công thức</h2>
+
+<!-- tìm kiếm -->
+<input type="text" id="search" placeholder="🔍 Nhập tên món ăn">
+
+<!-- form nhập -->
+<div class="form">
+  <input id="name" placeholder="Tên món">
+  <textarea id="ingredients" placeholder="Nguyên liệu"></textarea>
+  <textarea id="steps" placeholder="Cách làm"></textarea>
+  <button onclick="addRecipe()">➕ Lưu</button>
+</div>
+
+<hr>
+
+<!-- danh sách -->
+<div id="recipeList"></div>
+
+<script src="app.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
+</script>
+
+</body>
+</html>
+
