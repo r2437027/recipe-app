@@ -29,7 +29,7 @@ async function addRecipe() {
   const steps = document.getElementById('steps').value;
 
   if (!name) {
-    alert("Chưa nhập tên món!");
+    alert("商品名をまだ入力しない!");
     return;
   }
 
@@ -67,8 +67,8 @@ async function loadRecipes() {
     list.innerHTML += `
       <div class="recipe">
         <h3>${r.name}</h3>
-        <b>Nguyên liệu</b><br>${r.ingredients}<br>
-        <b>Cách làm</b><br>${r.steps}<br><br>
+        <b>材料</b><br>${r.ingredients}<br>
+        <b>やり方</b><br>${r.steps}<br><br>
         <button onclick="editRecipe('${docSnap.id}', \`${r.name}\`, \`${r.ingredients}\`, \`${r.steps}\`)">✏️整理</button>
         <button onclick="deleteRecipe('${docSnap.id}')">🗑 削除</button>
       </div>
@@ -93,3 +93,4 @@ window.deleteRecipe = deleteRecipe;
 window.editRecipe = editRecipe;
 
 loadRecipes();
+
