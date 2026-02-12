@@ -1,47 +1,46 @@
 let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
+let editIndex = null;
 
-// thêm công thức
+// Lưu hoặc cập nhật
 function addRecipe() {
-  const name = document.getElementById('name').value;
-  const ingredients = document.getElementById('ingredients').value;
-  const steps = document.getElementById('steps').value;
+  const nameInput = document.getElementById('name');
+  const ingredientsInput = document.getElementById('ingredients');
+  const stepsInput = document.getElementById('steps');
+
+  const name = nameInput.value.trim();
+  const ingredients = ingredientsInput.value.trim();
+  const steps = stepsInput.value.trim();
 
   if (!name) {
     alert("Chưa nhập tên món!");
     return;
   }
 
-  recipes.push({ name, ingredients, steps });
+  if (editIndex === null) {
+    // Thêm mới
+    recipes.push({ name, ingredients, steps });
+  } else {
+    // Cập nhật
+    recipes[editIndex] = { name, ingredients, steps };
+    editIndex = null;
+  }
+
   localStorage.setItem('recipes', JSON.stringify(recipes));
 
-  document.getElementById('name').value = '';
-  document.getElementById('ingredients').value = '';
-  document.getElementById('steps').value = '';
+  nameInput.value = '';
+  ingredientsInput.value = '';
+  stepsInput.value = '';
 
   render();
 }
 
-// hiển thị
+// Hiển thị danh sách
 function render(keyword = '') {
   const list = document.getElementById('recipeList');
   list.innerHTML = '';
 
   recipes
     .filter(r => r.name.toLowerCase().includes(keyword.toLowerCase()))
-    .forEach(r => {
+    .forEach((r, index) => {
       list.innerHTML += `
         <div class="recipe">
-          <h3>${r.name}</h3>
-          <b>Nguyên liệu</b><br>${r.ingredients}<br>
-          <b>Cách làm</b><br>${r.steps}
-        </div>
-      `;
-    });
-}
-
-// tìm kiếm
-document.getElementById('search').addEventListener('input', e => {
-  render(e.target.value);
-});
-
-render();
