@@ -1,12 +1,3 @@
-const deleteItemName = document.getElementById("deleteItemName");
-
-let deleteTargetId = null;
-
-const deleteModal = document.getElementById("deleteModal");
-const confirmDeleteBtn = document.getElementById("confirmDelete");
-const cancelDeleteBtn = document.getElementById("cancelDelete");
-
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { 
   getFirestore,
@@ -79,19 +70,16 @@ async function loadRecipes() {
         <b>材料🌼</b><br>${r.ingredients}<br>
         <b>作り方🍳</b><br>${r.steps}<br><br>
         <button onclick="editRecipe('${docSnap.id}', \`${r.name}\`, \`${r.ingredients}\`, \`${r.steps}\`)">✏️整理</button>
-        <button onclick="deleteRecipe('${docSnap.id}', \`${data.name}\`)">🗑 削除</button>
+        <button onclick="deleteRecipe('${docSnap.id}')">🗑 削除</button>
       </div>
     `;
   });
 }
 
-async function deleteRecipe(id, name) {
-  deleteTargetId = id;
-  deleteItemName.textContent = name;
-  deleteModal.classList.add("show");
+async function deleteRecipe(id) {
+  await deleteDoc(doc(db, "recipes", id));
+  loadRecipes();
 }
-
-
 
 function editRecipe(id, name, ingredients, steps) {
   document.getElementById('name').value = name;
@@ -134,7 +122,7 @@ async function searchRecipe() {
           <b>材料🌼</b><br>${r.ingredients}<br>
           <b>作り方🍳</b><br>${r.steps}<br><br>
           <button onclick="editRecipe('${docSnap.id}', \`${r.name}\`, \`${r.ingredients}\`, \`${r.steps}\`)">✏️整理</button>
-          <button onclick="deleteRecipe('${docSnap.id}',\`${data.name}\`)">🗑 削除</button>
+          <button onclick="deleteRecipe('${docSnap.id}')">🗑 削除</button>
         </div>
       `;
     }
@@ -147,73 +135,6 @@ async function searchRecipe() {
 }
 
 window.searchRecipe = searchRecipe;
-
-confirmDeleteBtn.addEventListener("click", async () => {
-  if (!deleteTargetId) return;
-
-  try {
-    await deleteDoc(doc(db, "recipes", deleteTargetId));
-  } catch (error) {
-    console.error("削除エラー:", error);
-  }
-
-  deleteModal.classList.remove("show");
-  deleteTargetId = null;
-});
-
-cancelDeleteBtn.addEventListener("click", () => {
-  deleteModal.classList.remove("show");
-  deleteTargetId = null;
-});
-
-
-
-const recipeList = document.getElementById("recipeList");
-const searchList = document.getElementById("searchList");
-let allRecipes = [];
-
-import { onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-onSnapshot(collection(db, "recipes"), (snapshot) => {
-  allRecipes = snapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data()
-  }));
-
-  renderList(allRecipes);
-});
-
-
-function renderList(data) {
-  recipeList.innerHTML = "";
-
-  data
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .forEach(recipe => {
-      recipeList.innerHTML += `
-        <div class="recipe-item">
-          <div class="recipe-name">${recipe.name}</div>
-
-          <div class="recipe-buttons">
-            <button class="edit-btn" onclick="editRecipe('${recipe.id}')">編集</button>
-            <button class="delete-btn" onclick="deleteRecipe('${recipe.id}', \`${recipe.name}\`)">削除</button>
-          </div>
-        </div>
-      `;
-    });
-}
-
-searchList.addEventListener("input", () => {
-  const keyword = searchList.value.toLowerCase();
-
-  const filtered = allRecipes.filter(recipe =>
-    recipe.name.toLowerCase().includes(keyword)
-  );
-
-  renderList(filtered);
-});
-
-
 
 
 
