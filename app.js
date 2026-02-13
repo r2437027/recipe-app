@@ -144,6 +144,24 @@ async function searchRecipe() {
 
 window.searchRecipe = searchRecipe;
 
+confirmDeleteBtn.addEventListener("click", async () => {
+  if (!deleteTargetId) return;
+
+  try {
+    await deleteDoc(doc(db, "recipes", deleteTargetId));
+  } catch (error) {
+    console.error("削除エラー:", error);
+  }
+
+  deleteModal.classList.remove("show");
+  deleteTargetId = null;
+});
+
+cancelDeleteBtn.addEventListener("click", () => {
+  deleteModal.classList.remove("show");
+  deleteTargetId = null;
+});
+
 
 
 
