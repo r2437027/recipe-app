@@ -172,6 +172,17 @@ const recipeList = document.getElementById("recipeList");
 const searchList = document.getElementById("searchList");
 let allRecipes = [];
 
+import { onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+onSnapshot(collection(db, "recipes"), (snapshot) => {
+  allRecipes = snapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  }));
+
+  renderList(allRecipes);
+});
+
 
 
 
