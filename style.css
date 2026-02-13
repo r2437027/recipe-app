@@ -88,5 +88,11 @@ button {
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+.delete-name {
+  font-weight: bold;
+  margin-top: 8px;
+  color: #e53935;
+}
+
 
 
