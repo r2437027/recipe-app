@@ -134,7 +134,7 @@ async function searchRecipe() {
           <b>材料🌼</b><br>${r.ingredients}<br>
           <b>作り方🍳</b><br>${r.steps}<br><br>
           <button onclick="editRecipe('${docSnap.id}', \`${r.name}\`, \`${r.ingredients}\`, \`${r.steps}\`)">✏️整理</button>
-          <button onclick="deleteRecipe('${docSnap.id}')">🗑 削除</button>
+          <button onclick="deleteRecipe('${docSnap.id}',\`${data.name}\`)">🗑 削除</button>
         </div>
       `;
     }
@@ -165,6 +165,7 @@ cancelDeleteBtn.addEventListener("click", () => {
   deleteModal.classList.remove("show");
   deleteTargetId = null;
 });
+
 
 
 
