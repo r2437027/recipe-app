@@ -168,6 +168,11 @@ cancelDeleteBtn.addEventListener("click", () => {
 
 
 
+const recipeList = document.getElementById("recipeList");
+const searchList = document.getElementById("searchList");
+
+let allRecipes = [];
+
 
 
 
