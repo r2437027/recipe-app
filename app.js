@@ -1,3 +1,5 @@
+const deleteItemName = document.getElementById("deleteItemName");
+
 let deleteTargetId = null;
 
 const deleteModal = document.getElementById("deleteModal");
@@ -77,16 +79,18 @@ async function loadRecipes() {
         <b>材料🌼</b><br>${r.ingredients}<br>
         <b>作り方🍳</b><br>${r.steps}<br><br>
         <button onclick="editRecipe('${docSnap.id}', \`${r.name}\`, \`${r.ingredients}\`, \`${r.steps}\`)">✏️整理</button>
-        <button onclick="deleteRecipe('${docSnap.id}')">🗑 削除</button>
+        <button onclick="deleteRecipe('${docSnap.id}', \`${data.name}\`)">🗑 削除</button>
       </div>
     `;
   });
 }
 
-async function deleteRecipe(id) {
+async function deleteRecipe(id, name) {
   deleteTargetId = id;
+  deleteItemName.textContent = name;
   deleteModal.classList.add("show");
 }
+
 
 
 function editRecipe(id, name, ingredients, steps) {
@@ -161,6 +165,7 @@ cancelDeleteBtn.addEventListener("click", () => {
   deleteModal.classList.remove("show");
   deleteTargetId = null;
 });
+
 
 
 
