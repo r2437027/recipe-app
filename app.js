@@ -184,6 +184,35 @@ onSnapshot(collection(db, "recipes"), (snapshot) => {
 });
 
 
+function renderList(data) {
+  recipeList.innerHTML = "";
+
+  data
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .forEach(recipe => {
+      recipeList.innerHTML += `
+        <div class="recipe-item">
+          <div class="recipe-name">${recipe.name}</div>
+
+          <div class="recipe-buttons">
+            <button class="edit-btn" onclick="editRecipe('${recipe.id}')">編集</button>
+            <button class="delete-btn" onclick="deleteRecipe('${recipe.id}', \`${recipe.name}\`)">削除</button>
+          </div>
+        </div>
+      `;
+    });
+}
+
+searchList.addEventListener("input", () => {
+  const keyword = searchList.value.toLowerCase();
+
+  const filtered = allRecipes.filter(recipe =>
+    recipe.name.toLowerCase().includes(keyword)
+  );
+
+  renderList(filtered);
+});
+
 
 
 
