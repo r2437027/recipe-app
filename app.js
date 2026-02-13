@@ -1,3 +1,10 @@
+let deleteTargetId = null;
+
+const deleteModal = document.getElementById("deleteModal");
+const confirmDeleteBtn = document.getElementById("confirmDelete");
+const cancelDeleteBtn = document.getElementById("cancelDelete");
+
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { 
   getFirestore,
@@ -77,9 +84,10 @@ async function loadRecipes() {
 }
 
 async function deleteRecipe(id) {
-  await deleteDoc(doc(db, "recipes", id));
-  loadRecipes();
+  deleteTargetId = id;
+  deleteModal.classList.add("show");
 }
+
 
 function editRecipe(id, name, ingredients, steps) {
   document.getElementById('name').value = name;
@@ -135,6 +143,7 @@ async function searchRecipe() {
 }
 
 window.searchRecipe = searchRecipe;
+
 
 
 
