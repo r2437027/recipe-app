@@ -77,9 +77,17 @@ async function loadRecipes() {
 }
 
 async function deleteRecipe(id) {
+
+  const confirmDelete = confirm("本当に削除しますか？");
+
+  if (!confirmDelete) {
+    return; // bấm Cancel thì không xoá
+  }
+
   await deleteDoc(doc(db, "recipes", id));
   loadRecipes();
 }
+
 
 function editRecipe(id, name, ingredients, steps) {
   document.getElementById('name').value = name;
@@ -135,6 +143,7 @@ async function searchRecipe() {
 }
 
 window.searchRecipe = searchRecipe;
+
 
 
 
